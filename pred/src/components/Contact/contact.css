@@ -1,0 +1,92 @@
+/* contact.css */
+.footer {
+    background-color: #1a2526; /* Dark background color similar to the image */
+    color: #ffffff; /* White text */
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .footer-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+  
+  .footer-section {
+    flex: 1;
+    min-width: 200px;
+    margin: 0 20px;
+  }
+  
+  .footer-logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .footer-logo::before {
+    content: '⚡'; /* Adding the lightning bolt symbol before the logo */
+    margin-right: 5px;
+    color: #ffffff;
+  }
+  
+  .footer-tagline {
+    font-size: 14px;
+    color: #b0b0b0; /* Slightly lighter text for the tagline */
+    line-height: 1.5;
+  }
+  
+  .footer-heading {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .footer-links,
+  .footer-contact {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-links li,
+  .footer-contact li {
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  
+  .footer-links a {
+    color: #b0b0b0; /* Lighter text for links */
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-links a:hover {
+    color: #ffffff; /* White on hover */
+  }
+  
+  .footer-contact li {
+    color: #b0b0b0; /* Lighter text for contact info */
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 12px;
+    color: #b0b0b0;
+    border-top: 1px solid #333; /* Subtle border above the copyright */
+    padding-top: 20px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .footer-container {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .footer-section {
+      margin: 20px 0;
+    }
+  }

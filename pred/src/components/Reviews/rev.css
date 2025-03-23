@@ -1,0 +1,148 @@
+/* rev.css */
+.rev {
+    width: 100%;
+    padding: 80px 5%;
+    background-color: #f8f9fa;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .rev h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #333333;
+    margin-bottom: 50px;
+    text-align: center;
+    position: relative;
+  }
+  
+  .rev h2::after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 3px;
+    background-color: #007bff;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .rev-card {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1200px;
+    width: 100%;
+  }
+  
+  .card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 30px;
+    flex: 1;
+    max-width: 350px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .user-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+  }
+  
+  .user-details h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333333;
+    margin: 0;
+  }
+  
+  .user-details .title {
+    font-size: 14px;
+    color: #007bff;
+    margin: 0;
+  }
+  
+  .review-text {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #666666;
+    margin: 0;
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 768px) {
+    .rev {
+      padding: 60px 3%;
+    }
+  
+    .rev h2 {
+      font-size: 30px;
+    }
+  
+    .rev-card {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .card {
+      max-width: 100%;
+      margin-bottom: 20px;
+    }
+  
+    .user-details h4 {
+      font-size: 16px;
+    }
+  
+    .user-details .title {
+      font-size: 13px;
+    }
+  
+    .review-text {
+      font-size: 14px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .rev {
+      padding: 40px 3%;
+    }
+  
+    .rev h2 {
+      font-size: 24px;
+    }
+  
+    .user-img {
+      width: 40px;
+      height: 40px;
+    }
+  
+    .user-details h4 {
+      font-size: 14px;
+    }
+  
+    .user-details .title {
+      font-size: 12px;
+    }
+  
+    .review-text {
+      font-size: 13px;
+    }
+  }

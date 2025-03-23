@@ -1,0 +1,125 @@
+/* tech.css */
+.tech {
+    width: 100%;
+    padding: 80px 5%;
+    background-color: #ffffff;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .tech h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #333333;
+    margin-bottom: 50px;
+    text-align: center;
+    position: relative;
+  }
+  
+  .tech h2::after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 3px;
+    background-color: #007bff;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .tech-card {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1200px;
+    width: 100%;
+  }
+  
+  .card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    flex: 1;
+    max-width: 350px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card svg {
+    font-size: 40px;
+    color: #007bff;
+    margin-bottom: 20px;
+  }
+  
+  .card h4 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333333;
+    margin-bottom: 15px;
+  }
+  
+  .card p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #666666;
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 768px) {
+    .tech {
+      padding: 60px 3%;
+    }
+  
+    .tech h2 {
+      font-size: 30px;
+    }
+  
+    .tech-card {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .card {
+      max-width: 100%;
+      margin-bottom: 20px;
+    }
+  
+    .card h4 {
+      font-size: 18px;
+    }
+  
+    .card p {
+      font-size: 14px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .tech {
+      padding: 40px 3%;
+    }
+  
+    .tech h2 {
+      font-size: 24px;
+    }
+  
+    .card svg {
+      font-size: 35px;
+    }
+  
+    .card h4 {
+      font-size: 16px;
+    }
+  
+    .card p {
+      font-size: 13px;
+    }
+  }

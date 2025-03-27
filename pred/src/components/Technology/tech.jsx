@@ -10,17 +10,17 @@ const tech = () => {
        <div className='tech-card'>
           <div className='card'>
             <FaCalculator />
-            <h4>Precise Calculations</h4>
+            <h4>Precise BMI classification</h4>
             <p>Advanced algorithms ensure accurate BMI 
-                measurements based on international 
-                health standards.
+                clasification based on individual user 
+                health metrics.
             </p>
           </div>
 
           <div className='card'>
           <FaHeartCircleCheck />
             <h4>Health Insights</h4>
-            <p>Get detailed health recommendations and personalized insights based on your BMI.
+            <p>Get detailed recommendations and personalized insights based on your health metrics.
             </p>
           </div>
 

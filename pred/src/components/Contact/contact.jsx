@@ -8,9 +8,9 @@ const Contact = () => {
       <div className="footer-container">
         {/* Left Section: Logo and Tagline */}
         <div className="footer-section">
-          <h2 className="footer-logo">HealthBMI</h2>
+          <h2 className="footer-logo">FitVerse</h2>
           <p className="footer-tagline">
-            Your trusted partner in health monitoring and wellness journey.
+            FitVerse, your trusted partner in health monitoring and wellness journey.
           </p>
         </div>
 
@@ -29,16 +29,16 @@ const Contact = () => {
         <div className="footer-section">
           <h3 className="footer-heading">Contact Info</h3>
           <ul className="footer-contact">
-            <li>Email: contact@healthbmi.com</li>
-            <li>Phone: +1 (555) 123-4567</li>
-            <li>Address: 123 Health Street, Wellness City</li>
+            <li>Email: g.tumwesigye@alustudent.com</li>
+            <li>Phone: +1 (250) 78--</li>
+            <li>Address: Kigali, Rwanda</li>
           </ul>
         </div>
       </div>
 
       {/* Copyright Section */}
       <div className="footer-bottom">
-        <p>&copy; 2025 HealthBMI. All rights reserved.</p>
+        <p>&copy; 2025 Fitverse/Geofrey Tumwesigye. All rights reserved.</p>
       </div>
     </footer>
   );

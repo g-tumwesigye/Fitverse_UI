@@ -14,8 +14,8 @@
   }
   
   .logo img {
-    max-height: 50px;
-    width: auto;
+    height: 100px;
+    width: 500px;
   }
   
   .links ul {

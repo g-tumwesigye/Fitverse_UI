@@ -100,21 +100,7 @@ const Hero = () => {
       }
 
       const result = await response.json();
-      // For now, we'll assume the backend returns a simple message.
-      // We'll enhance this later when backend is updated.
-      setRetrainResult({
-        message: result.message,
-        metrics: {
-          test_loss: 0.3773, // Placeholder values based on Colab
-          accuracy: 0.8560,
-          precision: 0.8565,
-          recall: 0.8560,
-          f1_score: 0.8555,
-          roc_auc: 0.9802
-        },
-        confusion_matrix: null, // Placeholder; backend should return base64 image
-        loss_plot: null // Placeholder; backend should return base64 image
-      });
+      setRetrainResult(result);
     } catch (err) {
       console.error('Error during retraining:', err);
       setRetrainError(err.message || 'Failed to retrain model. Please try again.');
@@ -126,13 +112,11 @@ const Hero = () => {
   return (
     <div className='hero'>
       <div className='hero-content'>
-        <h1>Your Journey to Better Health Starts Here</h1>
-        <p>Discover your body mass index with our advanced 
-           BMI calculator. Take the first step towards a healthier
-           lifestyle with personalized insights and recommendations.</p>
+        <h1>Your journey to a better health starts here</h1>
+        <p>Experience the future of health monitoring with our cutting-edge machine learning technology. Get precise BMI classifications and personalized insights.</p>
         <div className='button-container'>
           <button onClick={() => setIsModalOpen(true)}>
-            Calculate now <IoMdArrowForward />
+            Predict <IoMdArrowForward />
           </button>
           <button onClick={() => setIsRetrainModalOpen(true)}>
             Retrain
@@ -143,7 +127,7 @@ const Hero = () => {
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <h2>BMI Calculator</h2>
+            <h2>BMI Case Prediction</h2>
             <div className="form-group">
               <label>Weight (kg):</label>
               <input
@@ -249,15 +233,18 @@ const Hero = () => {
               <div className="retrain-result">
                 <h3>Retraining Results</h3>
                 <p><strong>Message:</strong> {retrainResult.message}</p>
-                <h4>Performance Metrics</h4>
-                <ul>
-                  <li><strong>Test Loss:</strong> {retrainResult.metrics.test_loss.toFixed(4)}</li>
-                  <li><strong>Accuracy:</strong> {retrainResult.metrics.accuracy.toFixed(4)}</li>
-                  <li><strong>Precision:</strong> {retrainResult.metrics.precision.toFixed(4)}</li>
-                  <li><strong>Recall:</strong> {retrainResult.metrics.recall.toFixed(4)}</li>
-                  <li><strong>F1 Score:</strong> {retrainResult.metrics.f1_score.toFixed(4)}</li>
-                  <li><strong>ROC AUC:</strong> {retrainResult.metrics.roc_auc.toFixed(4)}</li>
-                </ul>
+                {retrainResult.metrics && (
+                  <>
+                    <h4>Performance Metrics</h4>
+                    <ul>
+                      <li>Test Loss: {retrainResult.metrics.test_loss.toFixed(4)}</li>
+                      <li>Accuracy: {retrainResult.metrics.accuracy.toFixed(4)}</li>
+                      <li>Precision: {retrainResult.metrics.precision.toFixed(4)}</li>
+                      <li>Recall: {retrainResult.metrics.recall.toFixed(4)}</li>
+                      <li>F1 Score: {retrainResult.metrics.f1_score.toFixed(4)}</li>
+                    </ul>
+                  </>
+                )}
                 {retrainResult.confusion_matrix && (
                   <div>
                     <h4>Confusion Matrix</h4>

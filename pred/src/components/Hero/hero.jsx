@@ -242,6 +242,7 @@ const Hero = () => {
                       <li>Precision: {retrainResult.metrics.precision.toFixed(4)}</li>
                       <li>Recall: {retrainResult.metrics.recall.toFixed(4)}</li>
                       <li>F1 Score: {retrainResult.metrics.f1_score.toFixed(4)}</li>
+                      <li>ROC AUC: {retrainResult.metrics.roc_auc.toFixed(4)}</li>
                     </ul>
                   </>
                 )}

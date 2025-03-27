@@ -4,6 +4,7 @@ import './hero.css';
 
 const Hero = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isRetrainModalOpen, setIsRetrainModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     weight: '',
     height: '',
@@ -11,6 +12,12 @@ const Hero = () => {
     BMI: '',
     gender: ''
   });
+  const [prediction, setPrediction] = useState(null);
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [retrainFile, setRetrainFile] = useState(null);
+  const [retrainResult, setRetrainResult] = useState(null);
+  const [retrainError, setRetrainError] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -20,25 +27,98 @@ const Hero = () => {
     }));
   };
 
-  const calculateBMI = () => {
-    const bmi = (formData.weight / (formData.height * formData.height)).toFixed(1);
-    console.log('Calculated BMI:', bmi);
-    // You can add more logic here to handle the result
-    setIsModalOpen(false);
+  const handlePredict = async () => {
+    const { weight, height, age, BMI, gender } = formData;
+    if (!weight || !height || !age || !BMI || !gender) {
+      setError('Please fill in all fields.');
+      setPrediction(null);
+      return;
+    }
+
+    setIsLoading(true);
+    setError(null);
+    setPrediction(null);
+
+    try {
+      const payload = {
+        Weight: parseFloat(weight),
+        Height: parseFloat(height),
+        BMI: parseFloat(BMI),
+        Age: parseFloat(age),
+        Gender: gender
+      };
+
+      const response = await fetch('https://fitverse-q8be.onrender.com/predict', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || `HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      setPrediction(result.predicted_bmi_case);
+    } catch (err) {
+      console.error('Error during prediction:', err);
+      setError(err.message || 'Failed to get prediction. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleFileChange = (e) => {
+    setRetrainFile(e.target.files[0]);
+  };
+
+  const handleRetrain = async () => {
+    if (!retrainFile) {
+      setRetrainError('Please upload a CSV file.');
+      return;
+    }
+
+    setIsLoading(true);
+    setRetrainError(null);
+    setRetrainResult(null);
+
+    const formData = new FormData();
+    formData.append('file', retrainFile);
+
+    try {
+      const response = await fetch('https://fitverse-q8be.onrender.com/retrain', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || `HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      setRetrainResult(result); // Use the full response from the backend
+    } catch (err) {
+      console.error('Error during retraining:', err);
+      setRetrainError(err.message || 'Failed to retrain model. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className='hero'>
       <div className='hero-content'>
-        <h1>Your Journey to Better Health Starts Here</h1>
-        <p>Discover your body mass index with our advanced 
-           BMI calculator. Take the first step towards a healthier
-           lifestyle with personalized insights and recommendations.</p>
+        <h1>FitVerse, your journey to a better health starts here</h1>
+        <p>Experience the future of health monitoring with our cutting-edge machine learning technology. Get precise BMI classifications and personalized insights.</p>
         <div className='button-container'>
           <button onClick={() => setIsModalOpen(true)}>
-            Calculate now <IoMdArrowForward />
+            Predict <IoMdArrowForward />
           </button>
-          <button>
+          <button onClick={() => setIsRetrainModalOpen(true)}>
             Retrain
           </button>
         </div>
@@ -47,7 +127,7 @@ const Hero = () => {
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <h2>BMI Calculator</h2>
+            <h2>BMI Case Prediction</h2>
             <div className="form-group">
               <label>Weight (kg):</label>
               <input
@@ -56,6 +136,7 @@ const Hero = () => {
                 value={formData.weight}
                 onChange={handleInputChange}
                 placeholder="e.g. 78"
+                min="0"
               />
             </div>
             <div className="form-group">
@@ -67,6 +148,7 @@ const Hero = () => {
                 onChange={handleInputChange}
                 placeholder="e.g. 1.78"
                 step="0.01"
+                min="0"
               />
             </div>
             <div className="form-group">
@@ -77,6 +159,7 @@ const Hero = () => {
                 value={formData.age}
                 onChange={handleInputChange}
                 placeholder="e.g. 31"
+                min="0"
               />
             </div>
             <div className="form-group">
@@ -88,6 +171,7 @@ const Hero = () => {
                 onChange={handleInputChange}
                 placeholder="e.g. 22"
                 step="0.01"
+                min="0"
               />
             </div>
             <div className="form-group">
@@ -103,9 +187,83 @@ const Hero = () => {
               </select>
             </div>
             <div className="modal-buttons">
-              <button onClick={calculateBMI}>Calculate BMI</button>
-              <button onClick={() => setIsModalOpen(false)}>Close</button>
+              <button onClick={handlePredict} disabled={isLoading}>
+                {isLoading ? 'Predicting...' : 'Predict BMI Case'}
+              </button>
+              <button onClick={() => setIsModalOpen(false)} disabled={isLoading}>
+                Close
+              </button>
             </div>
+            {prediction && (
+              <div className="prediction-result">
+                <h3>Prediction Result</h3>
+                <p>Your predicted BMI case is: <strong>{prediction}</strong></p>
+              </div>
+            )}
+            {error && (
+              <div className="error-message">
+                <p>{error}</p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {isRetrainModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content retrain-modal">
+            <h2>Retrain Model</h2>
+            <div className="form-group">
+              <label>Upload New Dataset (.csv):</label>
+              <input
+                type="file"
+                accept=".csv"
+                onChange={handleFileChange}
+              />
+            </div>
+            <div className="modal-buttons">
+              <button onClick={handleRetrain} disabled={isLoading}>
+                {isLoading ? 'Retraining...' : 'Retrain Model'}
+              </button>
+              <button onClick={() => setIsRetrainModalOpen(false)} disabled={isLoading}>
+                Close
+              </button>
+            </div>
+            {retrainResult && (
+              <div className="retrain-result">
+                <h3>Retraining Results</h3>
+                <p><strong>Message:</strong> {retrainResult.message}</p>
+                {retrainResult.metrics && (
+                  <>
+                    <h4>Performance Metrics</h4>
+                    <ul>
+                      <li><strong>Test Loss:</strong> {retrainResult.metrics.test_loss.toFixed(4)}</li>
+                      <li><strong>Accuracy:</strong> {retrainResult.metrics.accuracy.toFixed(4)}</li>
+                      <li><strong>Precision:</strong> {retrainResult.metrics.precision.toFixed(4)}</li>
+                      <li><strong>Recall:</strong> {retrainResult.metrics.recall.toFixed(4)}</li>
+                      <li><strong>F1 Score:</strong> {retrainResult.metrics.f1_score.toFixed(4)}</li>
+                    </ul>
+                  </>
+                )}
+                {retrainResult.confusion_matrix && (
+                  <div>
+                    <h4>Confusion Matrix</h4>
+                    <img src={`data:image/png;base64,${retrainResult.confusion_matrix}`} alt="Confusion Matrix" />
+                  </div>
+                )}
+                {retrainResult.loss_plot && (
+                  <div>
+                    <h4>Training vs Validation Loss</h4>
+                    <img src={`data:image/png;base64,${retrainResult.loss_plot}`} alt="Loss Plot" />
+                  </div>
+                )}
+              </div>
+            )}
+            {retrainError && (
+              <div className="error-message">
+                <p>{retrainError}</p>
+              </div>
+            )}
           </div>
         </div>
       )}

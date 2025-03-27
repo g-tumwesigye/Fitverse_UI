@@ -247,15 +247,19 @@ const Hero = () => {
                   </>
                 )}
                 {retrainResult.confusion_matrix && (
-                  <div>
+                  <div className="image-container">
                     <h4>Confusion Matrix</h4>
-                    <img src={`data:image/png;base64,${retrainResult.confusion_matrix}`} alt="Confusion Matrix" />
+                    <div className="scrollable-image">
+                      <img src={`data:image/png;base64,${retrainResult.confusion_matrix}`} alt="Confusion Matrix" className="small-image" />
+                    </div>
                   </div>
                 )}
                 {retrainResult.loss_plot && (
-                  <div>
+                  <div className="image-container">
                     <h4>Training vs Validation Loss</h4>
-                    <img src={`data:image/png;base64,${retrainResult.loss_plot}`} alt="Loss Plot" />
+                    <div className="scrollable-image">
+                      <img src={`data:image/png;base64,${retrainResult.loss_plot}`} alt="Loss Plot" className="small-image" />
+                    </div>
                   </div>
                 )}
               </div>
@@ -273,3 +277,5 @@ const Hero = () => {
 };
 
 export default Hero;
+
+

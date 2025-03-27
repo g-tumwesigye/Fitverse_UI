@@ -1,104 +1,81 @@
-/* hero.css */
 .hero {
-  min-height: 80vh;
-  width: 100%;
-  background-image: url("/hero.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center center;
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: flex-start;
-  padding: 0 5%;
-  position: relative;
-  overflow: hidden;
-  z-index: 1; /* Ensure hero stays behind modal */
+  height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: white;
+  padding: 20px;
 }
 
 .hero-content {
+  text-align: left;
   max-width: 600px;
-  color: #ffffff;
-  padding: 20px;
-  margin-top: 80px; /* Offset for fixed navbar */
 }
 
 .hero-content h1 {
-  font-size: 48px;
-  font-weight: 700;
-  line-height: 1.2;
+  font-size: 3rem;
   margin-bottom: 20px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .hero-content p {
-  font-size: 18px;
-  line-height: 1.6;
+  font-size: 1.2rem;
   margin-bottom: 30px;
-  opacity: 0.9;
+  color: #d3d3d3;
 }
 
-.hero-content button {
-  padding: 12px 25px;
-  font-size: 16px;
-  font-weight: 500;
-  border: none;
-  border-radius: 5px;
+.button-container {
+  display: flex;
+  gap: 20px;
+}
+
+.button-container button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: 2px solid #00c4cc;
+  background: transparent;
+  color: white;
   cursor: pointer;
-  transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 15px; /* Space between buttons */
+  gap: 10px;
+  transition: all 0.3s ease;
 }
 
-.hero-content button:first-child {
-  background-color: #ffffff;
-  color: #1375de;
+.button-container button:hover {
+  background: #00c4cc;
+  color: #1a1a2e;
 }
 
-.hero-content button:first-child:hover {
-  background-color: #f0f0f0;
-  transform: translateX(5px);
-}
-
-.hero-content button:last-child {
-  background-color: transparent;
-  color: #ffffff;
-  border: 2px solid #ffffff;
-}
-
-.hero-content button:last-child:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  transform: translateX(5px);
-}
-
-/* Modal Styles */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Above hero section */
+  z-index: 1000;
 }
 
 .modal-content {
-  background-color: white;
+  background: white;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 10px;
   width: 90%;
-  max-width: 400px;
+  max-width: 500px;
   color: #333;
+}
+
+.retrain-modal {
+  max-width: 700px;
 }
 
 .modal-content h2 {
   margin-bottom: 20px;
-  color: #1375de;
+  color: #1a1a2e;
 }
 
 .form-group {
@@ -108,16 +85,16 @@
 .form-group label {
   display: block;
   margin-bottom: 5px;
-  font-weight: 500;
+  font-weight: bold;
 }
 
 .form-group input,
 .form-group select {
   width: 100%;
   padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
 }
 
 .modal-buttons {
@@ -127,65 +104,74 @@
 }
 
 .modal-buttons button {
-  flex: 1;
-  padding: 10px;
+  padding: 10px 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 1rem;
 }
 
 .modal-buttons button:first-child {
-  background-color: #1375de;
+  background: #00c4cc;
   color: white;
 }
 
-.modal-buttons button:first-child:hover {
-  background-color: #105cb6;
-}
-
 .modal-buttons button:last-child {
-  background-color: #f0f0f0;
+  background: #ccc;
   color: #333;
 }
 
-.modal-buttons button:last-child:hover {
-  background-color: #e0e0e0;
+.modal-buttons button:disabled {
+  background: #999;
+  cursor: not-allowed;
 }
 
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-  .hero {
-    padding: 0 3%;
-  }
-
-  .hero-content {
-    max-width: 100%;
-    margin-top: 60px;
-  }
-
-  .hero-content h1 {
-    font-size: 36px;
-  }
-
-  .hero-content p {
-    font-size: 16px;
-  }
-
-  .hero-content button {
-    font-size: 14px;
-    padding: 10px 20px;
-    width: 100%; /* Full width buttons on mobile */
-    justify-content: center;
-  }
+.prediction-result,
+.retrain-result {
+  margin-top: 20px;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 5px;
 }
 
-@media screen and (max-width: 480px) {
-  .hero-content h1 {
-    font-size: 28px;
-  }
+.retrain-result h4 {
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
 
-  .hero-content p {
-    font-size: 14px;
-  }
+.retrain-result ul {
+  list-style: none;
+  padding: 0;
+}
+
+.retrain-result ul li {
+  margin-bottom: 5px;
+}
+
+.error-message {
+  margin-top: 20px;
+  padding: 10px;
+  background: #ffe6e6;
+  color: #d32f2f;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* New styles for smaller, scrollable images */
+.image-container {
+  margin-top: 15px;
+}
+
+.scrollable-image {
+  max-height: 300px; /* Fixed height for the container */
+  max-width: 400px; /* Fixed width for the container */
+  overflow: auto; /* Enable scrolling if content overflows */
+  border: 1px solid #ccc; /* Optional: Add a border for better visibility */
+  border-radius: 5px;
+}
+
+.small-image {
+  width: 100%; /* Ensure the image fits within the container */
+  max-width: 350px; /* Limit the maximum width of the image */
+  height: auto; /* Maintain aspect ratio */
 }

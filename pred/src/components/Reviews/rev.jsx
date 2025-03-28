@@ -15,7 +15,7 @@ const Rev = () => {
             </div>
           </div>
           <p className='review-text'>
-            This BMI calculator has become an essential tool in my fitness coaching practice. The accuracy and ease of use make it perfect for quick assessments.
+            FitVerse has become an essential tool in my fitness coaching practice. The accuracy and ease of use make it perfect for quick assessments.
           </p>
         </div>
 
@@ -28,7 +28,7 @@ const Rev = () => {
             </div>
           </div>
           <p className='review-text'>
-            As a healthcare professional, I appreciate the precision and reliability. It’s become my go-to recommendation for patients tracking their health progress.
+            As a healthcare professional, I appreciate FitVerse precision and reliability. It’s become my go-to recommendation for patients tracking their health progress.
           </p>
         </div>
 
@@ -41,7 +41,7 @@ const Rev = () => {
             </div>
           </div>
           <p className='review-text'>
-            The best BMI calculator I’ve found. The interface is clean, results are precise, and the health insights are invaluable for my nutrition consultations.
+            FitVerse interface is clean, results are precise and the health insights are invaluable.
           </p>
         </div>
       </div>
